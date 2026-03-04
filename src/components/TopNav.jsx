@@ -1,12 +1,13 @@
 import React from 'react';
+import { User } from 'lucide-react';
 import './TopNav.css';
 
 const TopNav = () => {
     return (
         <div className="topnav">
             <h1 className="brand-name">Bluff AI</h1>
-            <div className="user-avatar">
-                <img src="https://ui-avatars.com/api/?name=User&background=a46cfc&color=fff" alt="User Avatar" />
+            <div className="user-profile-icon">
+                <User size={20} className="icon" />
             </div>
         </div>
     );
