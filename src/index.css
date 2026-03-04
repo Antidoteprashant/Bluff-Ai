@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Dark Mode (Default) */
+  --bg-primary: #131314;
+  --bg-secondary: #1e1f20;
+  --bg-hover: #2a2b2e;
+  
+  --text-primary: #e3e3e3;
+  --text-secondary: #c4c7c5;
+  --text-inverse: #1f1f1f;
+  
+  --border-color: #3c4043;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  
+  --gradient-main: linear-gradient(90deg, #4b90ff, #ff5546);
+  --gradient-hover: linear-gradient(90deg, #6b9fff, #ff7165);
+  --gradient-text: linear-gradient(90deg, #4b90ff, #a46cfc, #ff5546);
+  --gradient-button: linear-gradient(90deg, #4b90ff, #a46cfc, #ff5546);
+
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body.light-mode {
+  /* Light Mode */
+  --bg-primary: #f0f4f9;
+  --bg-secondary: #ffffff;
+  --bg-hover: #e0e4e9;
+  
+  --text-primary: #1f1f1f;
+  --text-secondary: #444746;
+  --text-inverse: #ffffff;
+  
+  --border-color: #e3e3e3;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Utilities */
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,56 @@
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 20px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .suggestion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .suggestion-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.suggestion-card {
+    height: 200px;
+    padding: 16px;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.suggestion-card:hover {
+    background-color: var(--bg-hover);
+    cursor: pointer;
+}
+
+.suggestion-text {
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.suggestion-icon-wrapper {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}

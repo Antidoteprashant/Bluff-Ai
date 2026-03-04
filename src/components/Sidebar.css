@@ -1,0 +1,136 @@
+.sidebar {
+    width: 280px;
+    background-color: var(--bg-secondary);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sidebar.closed {
+    width: 72px;
+    align-items: center;
+}
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: background-color 0.2s;
+}
+
+.sidebar.closed .menu-icon {
+    align-self: center;
+}
+
+.menu-icon:hover {
+    background-color: var(--bg-hover);
+}
+
+.new-chat-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 20px;
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+    font-weight: 500;
+    width: max-content;
+    transition: background-color 0.2s;
+}
+
+.sidebar.closed .new-chat-btn {
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.new-chat-btn:hover {
+    background-color: var(--border-color);
+}
+
+.recent-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.sidebar.closed .recent-section {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.recent-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-left: 12px;
+}
+
+.recent-entry {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 20px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.recent-entry:hover {
+    background-color: var(--bg-hover);
+}
+
+.recent-entry p {
+    margin: 0;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 20px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.sidebar.closed .action-item {
+    justify-content: center;
+    padding: 12px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+}
+
+.action-item:hover {
+    background-color: var(--bg-hover);
+}

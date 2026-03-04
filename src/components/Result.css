@@ -1,0 +1,127 @@
+.result-container {
+    padding: 0 5%;
+    max-height: 70vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.result-container::-webkit-scrollbar {
+    display: none;
+}
+
+.result-prompt {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    flex-shrink: 0;
+}
+
+.result-prompt p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: var(--sidebar-bg);
+    padding: 12px 18px;
+    border-radius: 20px;
+    border-top-left-radius: 4px;
+    margin: 0;
+    max-width: 80%;
+    border: 1px solid var(--border-color);
+}
+
+.result-data {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.ai-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sparkle-icon {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.result-data p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0;
+    flex: 1;
+}
+
+.result-data p b {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.loader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+}
+
+.loader hr {
+    border-radius: 4px;
+    border: none;
+    background-color: var(--bg-secondary);
+    background: linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff);
+    background-size: 800px 50px;
+    height: 20px;
+    animation: shimmer 2s infinite linear;
+}
+
+.light-mode .loader hr {
+    background: linear-gradient(to right, #e2e8f0, #ffffff, #e2e8f0);
+}
+
+.loader hr:last-child {
+    width: 60%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -800px 0;
+    }
+
+    100% {
+        background-position: 800px 0;
+    }
+}
