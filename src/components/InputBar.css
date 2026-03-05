@@ -61,3 +61,22 @@
     color: var(--text-secondary);
     margin-top: 12px;
 }
+
+.icon-btn.listening {
+    color: #ff4d4d;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
