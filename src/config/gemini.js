@@ -1,28 +1,29 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const apiKey = "AIzaSyAXSiFUdqAUytIeyW1ufH_mQaIymKZTdyk";
-const genAI = new GoogleGenerativeAI(apiKey);
-
-const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-});
-
-const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 8192,
-    responseMimeType: "text/plain",
-};
+const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
 async function runChat(prompt) {
-    const chatSession = model.startChat({
-        generationConfig,
-        history: [],
-    });
+    try {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: [
+                    { role: "user", content: prompt }
+                ],
+                temperature: 0.7,
+                max_tokens: 8192,
+            })
+        });
 
-    const result = await chatSession.sendMessage(prompt);
-    return result.response.text();
+        const data = await response.json();
+        return data.choices[0].message.content;
+    } catch (error) {
+        console.error("Error with Groq API:", error);
+        return "An error occurred while generating the response.";
+    }
 }
 
 export default runChat;
