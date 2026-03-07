@@ -112,6 +112,7 @@ bluff-ai/
 
 ## <img src="https://raw.githubusercontent.com/marella/material-design-icons/main/svg/outlined/terminal.svg" width="22" alt="terminal icon" /> Available Scripts
 
+
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server with hot reload |
@@ -120,6 +121,7 @@ bluff-ai/
 | `npm run lint` | Run ESLint to check code quality |
 
 ---
+
 
 ## <img src="https://raw.githubusercontent.com/marella/material-design-icons/main/svg/outlined/vpn_key.svg" width="22" alt="key icon" /> Environment Variables
 
