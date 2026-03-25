@@ -11,80 +11,81 @@ const ContextProvider = (props) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
-
-    const delayPara = (index, nextWord) => {
-        setTimeout(function () {
-            setResultData(prev => prev + nextWord);
-        }, 30 * index);
-    };
+    const [messages, setMessages] = useState([]);
+    const [isNewChat, setIsNewChat] = useState(true);
 
     const newChat = () => {
         setLoading(false);
         setShowResult(false);
         setInput("");
+        setMessages([]);
+        setIsNewChat(true);
+        setResultData("");
+    };
+
+    const processResponse = (response, prompt) => {
+        // Format response (bolding, line breaks)
+        let responseArray = response.split("**");
+        let newResponse = "";
+        for (let i = 0; i < responseArray.length; i++) {
+            if (i === 0 || i % 2 !== 1) {
+                newResponse += responseArray[i];
+            } else {
+                newResponse += "<b>" + responseArray[i] + "</b>";
+            }
+        }
+        let formattedResponse = newResponse.split("*").join("</br>");
+
+        // Cache the formatted response
+        setChatHistory(prev => ({ ...prev, [prompt]: formattedResponse }));
+
+        // Show result data instantly
+        setResultData(formattedResponse);
+
+        // Update messages list immediately
+        setMessages(prev => [...prev, { role: "model", content: formattedResponse }]);
+        setLoading(false);
     };
 
     const onSent = async (prompt) => {
-        setResultData("");
-        setLoading(true);
-        setShowResult(true);
-
         const currentPrompt = prompt !== undefined ? prompt : input;
 
         if (!currentPrompt) {
-            setLoading(false);
             return;
         }
 
+        // Snap initial setup
+        setResultData("");
+        setLoading(true);
+        setShowResult(true);
         setRecentPrompt(currentPrompt);
+        setInput("");
 
-        // If it's already in history, just load it from history
-        if (chatHistory[currentPrompt]) {
-            let historicalResponseResponseArray = chatHistory[currentPrompt].split(" ");
-            for (let i = 0; i < historicalResponseResponseArray.length; i++) {
-                const nextWord = historicalResponseResponseArray[i];
-                delayPara(i, nextWord + " ");
+        // Update messages with user prompt
+        const newUserMessage = { role: "user", content: currentPrompt };
+        setMessages(prev => [...prev, newUserMessage]);
+
+        // If it's a new chat session, add it to the sidebar history
+        if (isNewChat) {
+            if (!prevPrompts.includes(currentPrompt)) {
+                setPrevPrompts(prev => [currentPrompt, ...prev]);
             }
-            setLoading(false);
-            setInput("");
-            return;
+            setIsNewChat(false);
         }
 
-        // New prompt case
-        if (!prevPrompts.includes(currentPrompt)) {
-            setPrevPrompts(prev => [...prev, currentPrompt]);
+        // Check cache first for absolute instant repeat responses
+        if (chatHistory[currentPrompt]) {
+            processResponse(chatHistory[currentPrompt], currentPrompt);
+            return;
         }
 
         try {
             const response = await runChat(currentPrompt);
-
-            let responseArray = response.split("**");
-            let newResponse = "";
-            for (let i = 0; i < responseArray.length; i++) {
-                if (i === 0 || i % 2 !== 1) {
-                    newResponse += responseArray[i];
-                } else {
-                    newResponse += "<b>" + responseArray[i] + "</b>";
-                }
-            }
-            let newResponse2 = newResponse.split("*").join("</br>");
-
-            setChatHistory(prev => ({
-                ...prev,
-                [currentPrompt]: newResponse2
-            }));
-
-            let newResponseArray = newResponse2.split(" ");
-            for (let i = 0; i < newResponseArray.length; i++) {
-                const nextWord = newResponseArray[i];
-                delayPara(i, nextWord + " ");
-            }
+            processResponse(response, currentPrompt);
         } catch (error) {
             console.error("Error fetching Gemini response:", error);
             setResultData("⚠️ Sorry, the AI request failed. Please check the console or your API key.");
-        } finally {
             setLoading(false);
-            setInput("");
         }
     };
 
@@ -98,6 +99,7 @@ const ContextProvider = (props) => {
         showResult,
         loading,
         resultData,
+        messages,
         input,
         setInput,
         newChat
